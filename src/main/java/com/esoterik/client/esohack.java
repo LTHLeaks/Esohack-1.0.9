@@ -8,11 +8,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
 
-@Mod(modid="esohack", name="esohack", version="1.0.5")
+@Mod(modid="esohack", name="esohack", version="1.0.9")
 public class esohack {
     public static final String MODID = "esohack";
     public static final String MODNAME = "esohack";
-    public static final String MODVER = "1.0.5";
+    public static final String MODVER = "1.0.9";
     public static final Logger LOGGER = LogManager.getLogger((String)"esohack");
     private static String name = "esohack";
     public static ModuleManager moduleManager;
@@ -54,12 +54,12 @@ public class esohack {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        Display.setTitle((String)"esohack - v.1.0.5");
+        Display.setTitle((String)"Esohack - 1.0.9");
         esohack.load();
     }
 
     public static void load() {
-        LOGGER.info("\n\nLoading esohack 1.0.5");
+        LOGGER.info("\n\nLoading esohack 1.0.9");
         unloaded = false;
         if (reloadManager != null) {
             reloadManager.unload();
@@ -99,7 +99,7 @@ public class esohack {
     }
 
     public static void unload(boolean unload) {
-        LOGGER.info("\n\nUnloading esohack 1.0.5");
+        LOGGER.info("\n\nUnloading esohack 1.0.9");
         if (unload) {
             reloadManager = new ReloadManager();
             reloadManager.init(commandManager != null ? commandManager.getPrefix() : ".");
