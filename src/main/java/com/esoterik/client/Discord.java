@@ -14,17 +14,17 @@ public class Discord {
 
     public static void start() {
         DiscordEventHandlers handlers = new DiscordEventHandlers();
-        rpc.Discord_Initialize("823184074369663016", handlers, true, "");
+        rpc.Discord_Initialize("1083218783054856302", handlers, true, "");
         Discord.presence.startTimestamp = System.currentTimeMillis() / 1000L;
-        Discord.presence.details = esohack.getName() + " v" + "1.0.5";
+        Discord.presence.details = esohack.getName() + " -" + "1.0.9";
         Discord.presence.state = "balling";
-        Discord.presence.largeImageKey = "download";
-        Discord.presence.largeImageText = "https://discord.gg/wJq5nMEdNT";
+        Discord.presence.largeImageKey = "gang";
+        Discord.presence.largeImageText = "https://discord.gg/9UJksTn24f";
         rpc.Discord_UpdatePresence(presence);
         thread = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 rpc.Discord_RunCallbacks();
-                Discord.presence.details = esohack.getName() + " v" + "1.0.5";
+                Discord.presence.details = esohack.getName() + " -" + "1.0.9";
                 Discord.presence.state = "balling";
                 rpc.Discord_UpdatePresence(presence);
                 try {
