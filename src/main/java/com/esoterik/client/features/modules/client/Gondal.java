@@ -11,12 +11,12 @@ public class Gondal extends Module {
     }
 
     private void doenable() {
-        esohack.setName("gondal.club");
+        esohack.setName("Gondal.Club");
         esohack.commandManager.setClientMessage(TextUtil.coloredString("[", TextUtil.Color.WHITE) + TextUtil.coloredString(esohack.getName(), TextUtil.Color.DARK_PURPLE) + TextUtil.coloredString("]", TextUtil.Color.WHITE));
     }
 
     private void dodisable() {
-        esohack.setName("esohack");
+        esohack.setName("Esohack+");
         esohack.commandManager.setClientMessage(TextUtil.coloredString("[", TextUtil.Color.WHITE) + TextUtil.coloredString(esohack.getName(), TextUtil.Color.DARK_PURPLE) + TextUtil.coloredString("]", TextUtil.Color.WHITE));
     }
 
