@@ -177,9 +177,10 @@ public class AutoGondal extends Module {
     private final Map<EntityPlayer, Timer> totemPops;
 
     public AutoGondal() {
-        super("AutoGondal", "Best CA on the market", Category.COMBAT, true, false, false);
+        super("AutoGondal", "Last working esohack ca even tho i cant code", Category.COMBAT, true, false, false);
         this.setting = (Setting<Settings>)this.register(new Setting("Settings", Settings.PLACE));
         this.raytrace = (Setting<Raytrace>)this.register(new Setting("Raytrace", Raytrace.NONE, v -> this.setting.getValue() == Settings.MISC));
+        // PLACE SETTINGS
         this.place = (Setting<Boolean>)this.register(new Setting("Place", true, v -> this.setting.getValue() == Settings.PLACE));
         this.placeDelay = (Setting<Integer>)this.register(new Setting("PlaceDelay", 0, 0, 500, v -> this.setting.getValue() == Settings.PLACE && this.place.getValue()));
         this.placeRange = (Setting<Float>)this.register(new Setting("PlaceRange", 6.0f, 0.0f, 10.0f, v -> this.setting.getValue() == Settings.PLACE && this.place.getValue()));
@@ -195,6 +196,7 @@ public class AutoGondal extends Module {
         this.doublePop = (Setting<Boolean>)this.register(new Setting("AntiTotem", false, v -> this.setting.getValue() == Settings.PLACE && this.place.getValue()));
         this.popDamage = (Setting<Float>)this.register(new Setting("PopDamage", 4.0f, 0.0f, 6.0f, v -> this.setting.getValue() == Settings.PLACE && this.place.getValue() && this.doublePop.getValue()));
         this.popTime = (Setting<Integer>)this.register(new Setting("PopTime", 500, 0, 1000, v -> this.setting.getValue() == Settings.PLACE && this.place.getValue() && this.doublePop.getValue()));
+        // BREAK SETTINGS
         this.explode = (Setting<Boolean>)this.register(new Setting("Break", true, v -> this.setting.getValue() == Settings.BREAK));
         this.switchMode = (Setting<Switch>)this.register(new Setting("Attack", Switch.BREAKSLOT, v -> this.setting.getValue() == Settings.BREAK && this.explode.getValue()));
         this.breakDelay = (Setting<Integer>)this.register(new Setting("BreakDelay", 0, 0, 500, v -> this.setting.getValue() == Settings.BREAK && this.explode.getValue()));
@@ -206,6 +208,7 @@ public class AutoGondal extends Module {
         this.manualBreak = (Setting<Integer>)this.register(new Setting("ManualDelay", 500, 0, 500, v -> this.setting.getValue() == Settings.BREAK && this.manual.getValue()));
         this.sync = (Setting<Boolean>)this.register(new Setting("Sync", true, v -> this.setting.getValue() == Settings.BREAK && (this.explode.getValue() || this.manual.getValue())));
         this.instant = (Setting<Boolean>)this.register(new Setting("Predict", false, v -> this.setting.getValue() == Settings.BREAK && this.explode.getValue() && this.place.getValue()));
+        // RENDER SETTINGS
         this.render = (Setting<Boolean>)this.register(new Setting("Render", true, v -> this.setting.getValue() == Settings.RENDER));
         this.colorSync = (Setting<Boolean>)this.register(new Setting("Sync", false, v -> this.setting.getValue() == Settings.RENDER));
         this.box = (Setting<Boolean>)this.register(new Setting("Box", true, v -> this.setting.getValue() == Settings.RENDER && this.render.getValue()));
@@ -222,6 +225,7 @@ public class AutoGondal extends Module {
         this.cGreen = (Setting<Integer>)this.register(new Setting("OL-Green", 255, 0, 255, v -> this.setting.getValue() == Settings.RENDER && this.render.getValue() && this.customOutline.getValue() && this.outline.getValue()));
         this.cBlue = (Setting<Integer>)this.register(new Setting("OL-Blue", 255, 0, 255, v -> this.setting.getValue() == Settings.RENDER && this.render.getValue() && this.customOutline.getValue() && this.outline.getValue()));
         this.cAlpha = (Setting<Integer>)this.register(new Setting("OL-Alpha", 255, 0, 255, v -> this.setting.getValue() == Settings.RENDER && this.render.getValue() && this.customOutline.getValue() && this.outline.getValue()));
+        // MISC SETTINGS
         this.range = (Setting<Float>)this.register(new Setting("Range", 12.0f, 0.1f, 20.0f, v -> this.setting.getValue() == Settings.MISC));
         this.targetMode = (Setting<Target>)this.register(new Setting("Target", Target.CLOSEST, v -> this.setting.getValue() == Settings.MISC));
         this.minArmor = (Setting<Integer>)this.register(new Setting("MinArmor", 0, 0, 125, v -> this.setting.getValue() == Settings.MISC));
@@ -241,6 +245,7 @@ public class AutoGondal extends Module {
         this.noCount = (Setting<Boolean>)this.register(new Setting("AntiCount", false, v -> this.setting.getValue() == Settings.MISC && (this.antiFriendPop.getValue() == AntiFriendPop.ALL || this.antiFriendPop.getValue() == AntiFriendPop.BREAK)));
         this.calcEvenIfNoDamage = (Setting<Boolean>)this.register(new Setting("BigFriendCalc", false, v -> this.setting.getValue() == Settings.MISC && (this.antiFriendPop.getValue() == AntiFriendPop.ALL || this.antiFriendPop.getValue() == AntiFriendPop.BREAK) && this.targetMode.getValue() != Target.DAMAGE));
         this.predictFriendDmg = (Setting<Boolean>)this.register(new Setting("PredictFriend", false, v -> this.setting.getValue() == Settings.MISC && (this.antiFriendPop.getValue() == AntiFriendPop.ALL || this.antiFriendPop.getValue() == AntiFriendPop.BREAK) && this.instant.getValue()));
+        // DEV SETTINGS
         this.logic = (Setting<Logic>)this.register(new Setting("Logic", Logic.BREAKPLACE, v -> this.setting.getValue() == Settings.DEV));
         this.doubleMap = (Setting<Boolean>)this.register(new Setting("DoubleMap", false, v -> this.setting.getValue() == Settings.DEV && this.logic.getValue() == Logic.PLACEBREAK));
         this.damageSync = (Setting<DamageSync>)this.register(new Setting("DamageSync", DamageSync.NONE, v -> this.setting.getValue() == Settings.DEV));
