@@ -184,7 +184,8 @@ public class Module extends Feature {
 
         private final String name;
 
-        private Category(String name) {
+        
+        Category(String name) {
             this.name = name;
         }
 
@@ -192,5 +193,46 @@ public class Module extends Feature {
             return this.name;
         }
     }
-}
 
+    public class Animation
+            extends Thread {
+        public Module module;
+        public float offset;
+        public float vOffset;
+        public String lastText;
+        public boolean shouldMetaSlide;
+        ScheduledExecutorService service;
+
+        public Animation(Module module) {
+            super("Animation");
+            this.service = Executors.newSingleThreadScheduledExecutor();
+            this.module = module;
+        }
+
+        @Override
+        public void run() {
+            String text = this.module.getDisplayName() + "\u00a77" + (this.module.getDisplayInfo() != null ? " [\u00a7f" + this.module.getDisplayInfo() + "\u00a77" + "]" : "");
+            this.module.offset = (float) Module.this.renderer.getStringWidth(text) / HUD.getInstance().animationHorizontalTime.getValue().floatValue();
+            this.module.vOffset = (float) Module.this.renderer.getFontHeight() / HUD.getInstance().animationVerticalTime.getValue().floatValue();
+            if (this.module.isEnabled() && HUD.getInstance().animationHorizontalTime.getValue() != 1) {
+                if (this.module.arrayListOffset > this.module.offset && Util.mc.world != null) {
+                    this.module.arrayListOffset -= this.module.offset;
+                    this.module.sliding = true;
+                }
+            } else if (this.module.isDisabled() && HUD.getInstance().animationHorizontalTime.getValue() != 1) {
+                if (this.module.arrayListOffset < (float) Module.this.renderer.getStringWidth(text) && Util.mc.world != null) {
+                    this.module.arrayListOffset += this.module.offset;
+                    this.module.sliding = true;
+                } else {
+                    this.module.sliding = false;
+                }
+            }
+        }
+
+        @Override
+        public void start() {
+            System.out.println("Starting animation thread for " + this.module.getName());
+            this.service.scheduleAtFixedRate(this, 0L, 1L, TimeUnit.MILLISECONDS);
+        }
+    }
+}
